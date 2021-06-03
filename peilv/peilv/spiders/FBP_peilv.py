@@ -8,8 +8,10 @@ import time
 import json
 import scrapy.http
 
+# from peilv.items import PeilvItem
+
 # 获取当天或未来某天数据的地址
-from peilv.peilv.items import PeilvItem
+from ..items import PeilvItem
 
 wl_url = 'https://live.leisu.com/saicheng?date='  # wl历史https://live.leisu.com/saicheng?date=20190620
 # 获取历史数据的地址
@@ -17,7 +19,7 @@ ls_url = 'https://live.leisu.com/wanchang?date='  # ls历史https://live.leisu.c
 
 
 class LiveJiangSpider(scrapy.Spider):
-    name = 'FBP'
+    name = 'fbp'
     allowed_domains = ['leisu.com']
 
     def start_requests(self):
@@ -28,13 +30,11 @@ class LiveJiangSpider(scrapy.Spider):
         # m,n:1,4;4,7;7,11;11...间隔3天可以获取全的数据-也需多执行几次，取最多的一次，程序有bug有空调试
         for d_i in range(m, n):  # 20180604待解决问题：连续N天数据如何取值,20180609解决。range(m,n)获取“今天往前n-1天”至“今天往前m天”共计n-m-1天数据
             oneday = datetime.timedelta(days=d_i)  # 一天
-            print(oneday)
             d1 = str(today - oneday)
-            d1 = '20190727'
+            d1 = '20210531'
             # d1='20190606'
             # d1 = '2019-06-03'
             ### 未来 wl，#取未来某天的数据，单独手动执行此2行代码
-            print wl_url + d1
             request = scrapy.http.FormRequest(wl_url + d1,
                                               callback=self.parseWl, meta={'d1': d1})
             # ### 历史ls，#取历史N-M天的数据执行下边2行代码
@@ -49,7 +49,8 @@ class LiveJiangSpider(scrapy.Spider):
         print('---------------into parseWl-----------------')
         # d2=response.meta['d1'].replace('-', '')#获取传递进来的d1参数2018-06-09转化为20180609作为d2
         d2 = response.meta['d1']
-        # print(d2)
+        # print("="*10,d2)
+        print("="*10,response)
         # print("response1:"+str(response))
         sel = response.xpath
         # print("sel.data-id:"+str(sel('//li[@data-status="1"]/@data-id').extract()))
@@ -90,7 +91,6 @@ class LiveJiangSpider(scrapy.Spider):
         # item['title']=response.xpath('//div[@class="item"]').xpath('div[@class="pic"]/a/img/@alt').extract()#https://blog.csdn.net/circle2015/article/details/53053632
         racelist = [e5.split("'") for e5 in sel('//li[@data-status="8"]/@data-id').extract()]
         for raceid in racelist:  # raceid=['2674547'];raceid[0]=2674547
-            from items import PeilvItem
             item = PeilvItem()
             # raceid[0]="2674547"
             sel_div = sel('//li[@data-id=' + str(

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for peilv project
+# Scrapy settings for peilv_sub project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,21 +9,21 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'peilv'
+BOT_NAME = 'peilv_sub'
 
-SPIDER_MODULES = ['peilv.spiders']
-NEWSPIDER_MODULE = 'peilv.spiders'
+SPIDER_MODULES = ['peilv_sub.spiders']
+NEWSPIDER_MODULE = 'peilv_sub.spiders'
 
 # USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'
 # USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'
 
 # USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.54 Safari/536.5'
 user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"
-FEED_URI = 'file:///e:/Python learning/pc_ex/peilv/PeiLv.csv'
+FEED_URI = 'file:///e:/Python learning/pc_ex/peilv_sub/PeiLv.csv'
 FEED_FORMAT = 'csv'
 
 FEED_EXPORTERS = {
-    'csv': 'from peilv.peilv.spiders.itemcsvexporter import itemcsvexporter',
+    'csv': 'from peilv_sub.peilv_sub.spiders.itemcsvexporter import itemcsvexporter',
 } 
 FIELDS_TO_EXPORT = [
     'cc',
@@ -40,7 +40,7 @@ FIELDS_TO_EXPORT = [
 
 ]
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'peilv (+http://www.yourdomain.com)'
+#USER_AGENT = 'peilv_sub (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
@@ -72,13 +72,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'peilv.middlewares.PeilvSpiderMiddleware': 543,
+#    'peilv_sub.middlewares.PeilvSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'peilv.middlewares.PeilvDownloaderMiddleware': 543,
+#    'peilv_sub.middlewares.PeilvDownloaderMiddleware': 543,
 #}
 DOWNLOADER_MIDDLEWARES = {
 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
@@ -93,7 +93,7 @@ HTTPERROR_ALLOWED_CODES = [403]
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'peilv.pipelines.PeilvPipeline': 300,
+#    'peilv_sub.pipelines.PeilvPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

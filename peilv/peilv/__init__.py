@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# @Time    : 2021/5/31 21:39
-# @Author  : jhz
-# @Site    : 
-# @File    : __init__.py.py
-# @Software: PyCharm
+# This package will contain the spiders of your Scrapy project
+#
+# Please refer to the documentation for information on how to create and manage
+# your spiders.
