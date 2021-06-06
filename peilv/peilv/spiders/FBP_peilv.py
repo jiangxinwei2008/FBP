@@ -45,7 +45,31 @@ class LiveJiangSpider(scrapy.Spider):
         # 通过FromRequest，再通过parseBefore回调函数解析wl_url地址，将此页面的信息通过parseBefore中的response返回来
         print('-----------out start_requests------------------')
 
-    def parseWl(self, response):
+    def parseWl(self,response):
+        """ 自己写的解析函数 """
+        from lxml import etree
+        data = etree.HTML(response.text)
+        # with open("d://x.log", 'w') as f:
+        #     f.write(str(data))
+        sel = data.xpath
+        for x in sel('//a[@class="link skin-color-h"]//@href'):
+            print(x)
+            yield
+            {
+                'cc': x,
+            }
+
+
+
+        # for quote in response.css('div.lier-team-away'):
+        # yield {
+        #     'text': quote.css('span.text::text').extract_first(),
+        #     'author': quote.css('small.author::text').extract_first(),
+        #     'tags': quote.css('div.tags a.tag::text').extract(),
+        #
+        # }
+
+    def parseWl_old(self, response):
         print('---------------into parseWl-----------------')
         # d2=response.meta['d1'].replace('-', '')#获取传递进来的d1参数2018-06-09转化为20180609作为d2
         d2 = response.meta['d1']
